@@ -21,7 +21,6 @@ fn part1(input: &str) -> i32 {
             let rucksack_size = line.len();
             let comp1 = &&line[..(rucksack_size / 2)];
             let comp2 = &&line[(rucksack_size / 2)..];
-            println!("{} = {} + {}", line, comp1, comp2);
 
             let common_item = comp1
                 .chars()
@@ -36,8 +35,27 @@ fn part1(input: &str) -> i32 {
 }
 
 fn part2(input: &str) -> i32 {
-    println!("Not implemented yet!");
-    0
+    let line_count = input.lines().count();
+    let mut iterator = input.lines();
+    let mut total_priority = 0;
+
+    for _ in 0..line_count / 3 {
+        let (line1, line2, line3) = (
+            iterator.next().unwrap(),
+            iterator.next().unwrap(),
+            iterator.next().unwrap(),
+        );
+
+        let common_item = line1
+            .chars()
+            .filter(|&item| line2.contains(item) && line3.contains(item))
+            .next()
+            .unwrap();
+
+        total_priority += get_item_priority(common_item);
+    }
+
+    total_priority
 }
 
 fn main() {
