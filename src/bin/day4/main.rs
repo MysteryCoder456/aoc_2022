@@ -25,7 +25,20 @@ fn part1(input: &str) -> i32 {
 }
 
 fn part2(input: &str) -> i32 {
-    todo!()
+    input
+        .lines()
+        .filter(|line| {
+            let (range1_str, range2_str) = line.split_once(",").unwrap();
+
+            let range1: RangeInclusive<i32> = string_to_range(range1_str);
+            let range2: RangeInclusive<i32> = string_to_range(range2_str);
+
+            range1.contains(range2.start())
+                || range1.contains(range2.end())
+                || range2.contains(range1.start())
+                || range2.contains(range1.end())
+        })
+        .count() as i32
 }
 
 fn main() {
