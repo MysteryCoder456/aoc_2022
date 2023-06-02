@@ -10,6 +10,3 @@ itertools = "0.10"
 
 [lib]
 name = "input"
-
-[[bin]]
-name = "day1"
